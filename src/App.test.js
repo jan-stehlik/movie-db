@@ -1,3 +1,9 @@
+import React from 'react'
+import { render } from '@testing-library/react'
+import { App } from './App'
+
 it('should pass', () => {
-  expect(1).toBe(1)
+  const { getByText } = render(<App />)
+
+  getByText(/movie database search/i)
 })
