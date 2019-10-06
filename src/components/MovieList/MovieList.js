@@ -8,8 +8,12 @@ const useStyles = makeStyles(theme => ({
   movieList: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
     overflow: 'hidden'
+  },
+  tile: {
+    flexBasis: '21%',
+    margin: theme.spacing(1),
+    flexGrow: 1
   }
 }))
 
@@ -29,7 +33,7 @@ const MovieList = ({ data }) => {
   return (
     <div className={classes.movieList}>
       {data.map(tile => (
-        <GridListTile key={tile.imdbID}>
+        <GridListTile key={tile.imdbID} className={classes.tile}>
           <img src={tile.Poster} alt={tile.Title} />
           <GridListTileBar title={tile.Title} />
         </GridListTile>

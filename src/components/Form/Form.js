@@ -24,24 +24,31 @@ const Form = ({ handleSearch, isSearching = false }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return (
-    <Grid container spacing={2} className={classes.root}>
-      <Grid item>
-        <TextField
-          id="movie search"
-          label="Search for a movie"
-          placeholder="e.g. batman"
-          margin="normal"
-          variant="outlined"
-          value={searchTerm}
-          onChange={event => setSearchTerm(event.target.value)}
-        />
+    <form
+      onSubmit={event => {
+        event.preventDefault()
+        handleSearch(searchTerm)
+      }}
+    >
+      <Grid container spacing={2} className={classes.root}>
+        <Grid item>
+          <TextField
+            id="movie search"
+            label="Search for a movie"
+            placeholder="e.g. batman"
+            margin="normal"
+            variant="outlined"
+            value={searchTerm}
+            onChange={event => setSearchTerm(event.target.value)}
+          />
+        </Grid>
+        <Grid item className={classes.button}>
+          <Button variant="contained" color="primary" onClick={() => handleSearch(searchTerm)} disabled={isSearching}>
+            {isSearching ? 'Searching' : 'Search'}
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item className={classes.button}>
-        <Button variant="contained" color="primary" onClick={() => handleSearch(searchTerm)} disabled={isSearching}>
-          {isSearching ? 'Searching' : 'Search'}
-        </Button>
-      </Grid>
-    </Grid>
+    </form>
   )
 }
 
