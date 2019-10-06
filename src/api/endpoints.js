@@ -5,7 +5,7 @@ const getMoviesBySearchTerm = async searchTerm => {
   const url = getSearchUrl(searchTerm)
   const response = await axios(url)
 
-  return response
+  return response.data
 }
 
 export { getMoviesBySearchTerm }
