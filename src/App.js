@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import Typography from '@material-ui/core/Typography'
 import isEmpty from 'lodash.isempty'
 import { getMoviesBySearchTerm } from './api/endpoints'
-import { Form } from './components/Form'
+import { SearchForm } from './components/SearchForm'
 import { MovieList } from './components/MovieList'
 
 const searchTypes = {
@@ -61,7 +61,7 @@ const App = () => {
   return (
     <>
       <Typography variant="h3">Movie database search</Typography>
-      <Form handleSearch={handleSearch} isSearching={isSearching} />
+      <SearchForm handleSearch={handleSearch} isSearching={isSearching} />
       {!isSearching && !isEmpty(data) && <MovieList data={data} />}
       {!isSearching && !isEmpty(error) && (
         <Typography variant="body1" color="error">

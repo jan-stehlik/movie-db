@@ -1,24 +1,22 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { Form } from './Form'
-
-const searchTerm = 'test'
+import { SearchForm } from './SearchForm'
 
 it('should render search textfield', () => {
-  const { getByLabelText, getByPlaceholderText } = render(<Form handleSearch={() => {}} />)
+  const { getByLabelText, getByPlaceholderText } = render(<SearchForm handleSearch={() => {}} />)
 
   getByLabelText(/search for a movie/i)
   getByPlaceholderText(/e.g. batman/i)
 })
 
 it('should render search button ', () => {
-  const { getByText } = render(<Form handleSearch={() => {}} />)
+  const { getByText } = render(<SearchForm handleSearch={() => {}} />)
 
   getByText(/^search$/i)
 })
 
 it('should disable search button if already searching', () => {
-  const { getByText } = render(<Form handleSearch={() => {}} isSearching />)
+  const { getByText } = render(<SearchForm handleSearch={() => {}} isSearching />)
 
   const searchButton = getByText(/^searching$/i)
   expect(searchButton).toBeDisabled()
@@ -26,7 +24,7 @@ it('should disable search button if already searching', () => {
 
 describe('user types a search term', () => {
   it('should display search term', () => {
-    const { getByLabelText } = render(<Form handleSearch={() => {}} />)
+    const { getByLabelText } = render(<SearchForm handleSearch={() => {}} />)
 
     const searchInput = getByLabelText(/search for a movie/i)
     fireEvent.change(searchInput, { target: { value: 'test' } })
@@ -37,8 +35,9 @@ describe('user types a search term', () => {
 
 describe('user searches for a movie', () => {
   it('should call handleSearch callback with a search term input by a user', () => {
+    const searchTerm = 'test'
     const mockHandleSearch = jest.fn()
-    const { getByLabelText, getByText } = render(<Form handleSearch={mockHandleSearch} />)
+    const { getByLabelText, getByText } = render(<SearchForm handleSearch={mockHandleSearch} />)
 
     const searchInput = getByLabelText(/search for a movie/i)
     fireEvent.change(searchInput, { target: { value: searchTerm } })

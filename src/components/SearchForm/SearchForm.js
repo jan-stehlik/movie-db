@@ -19,7 +19,7 @@ const propTypes = {
   isSearching: PropTypes.bool
 }
 
-const Form = ({ handleSearch, isSearching = false }) => {
+const SearchForm = ({ handleSearch, isSearching = false }) => {
   const classes = useStyles()
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -52,6 +52,6 @@ const Form = ({ handleSearch, isSearching = false }) => {
   )
 }
 
-Form.propTypes = propTypes
+SearchForm.propTypes = propTypes
 
-export { Form }
+export { SearchForm }
