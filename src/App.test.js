@@ -26,30 +26,6 @@ it('should render title', () => {
   getByText(/movie database search/i)
 })
 
-it('should render search component', () => {
-  const { getByLabelText, getByPlaceholderText } = render(<App />)
-
-  getByLabelText(/search for a movie/i)
-  getByPlaceholderText(/e.g. batman/i)
-})
-
-it('should render search button component', () => {
-  const { getByText } = render(<App />)
-
-  getByText(/^search$/i)
-})
-
-describe('user types a search term', () => {
-  it('should display search term', () => {
-    const { getByLabelText } = render(<App />)
-
-    const searchInput = getByLabelText(/search for a movie/i)
-    fireEvent.change(searchInput, { target: { value: 'test' } })
-
-    expect(searchInput.value).toBe('test')
-  })
-})
-
 describe('user searches for a movie', () => {
   it('should call getMoviesBySearchTerm with a search term input by a user', async () => {
     const { getByLabelText, getByText } = render(<App />)
@@ -59,8 +35,6 @@ describe('user searches for a movie', () => {
 
     const searchButton = getByText(/^search$/i)
     fireEvent.click(searchButton)
-
-    getByText(/searching/i)
 
     await wait(() => expect(mockGetMoviesBySearchTerm).toHaveBeenCalledTimes(1))
     expect(mockGetMoviesBySearchTerm).toHaveBeenCalledWith(searchTerm)
